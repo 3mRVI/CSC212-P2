@@ -54,11 +54,12 @@
                     if (! events.isEmpty())  
                     {  
                         events.findFirst();  
-                        for ( int i = 0 ; i < events.size ; i++)  
+                        while(! events.isEmpty()) 
                         {   
                             if ((events.retrieve().date.compareTo(e.date) == 0)   
                                     && (events.retrieve().time.compareTo(e.time) == 0))  
                                 return false;  
+                            events.findNext();
                         }  
                   }  
                   
@@ -72,7 +73,7 @@
             if (events.isEmpty())  
                 return false;  
            Events val = new Events();  
-           val.eventTitle = eTitle;  
+           val.title = eTitle;  
             if (events.search(val))  
             {  
                 events.remove(val);  
