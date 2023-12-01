@@ -1,54 +1,91 @@
-import java.util.Date;
-
-public class Events implements Comparable<Events> {
-    String eventTitle;
-    String time;
-    Date date;
-    String eventLocation;
-    LinkedList<String> ContactsNames;
-
-    Events() {
-        eventTitle = null;
-        time = null;
-        date = null;
-        eventLocation = null;
-        ContactsNames = new LinkedList<>();
-    }
-
-    public Events(String contactName, String eventTitle, String time, String date, String location) {
-        this.eventTitle = eventTitle;
-        this.time = time;
-        this.date = new Date(date);
-        eventLocation = location;
-        ContactsNames = new LinkedList<>();
-        ContactsNames.addSort(contactName);
-    }
-
-    public boolean AddContact(String CName) {
-        return ContactsNames.addSort(CName);
-    }
-
-    public boolean removeContact(String CName) {
-        return ContactsNames.remove(CName);
-    }
-
-    @Override
-    public String toString() {
-        String Container = "Event found!" +
-                "\n Event's title: " + eventTitle + "\n Date and time: " + date + time +
-                "\n Event's location: " + eventLocation +
-                "\n Contacts's name: ";
-        ContactsNames.findFirst();
-        while (ContactsNames.current != null) {
-            Container += ContactsNames.retrieve();
-            ContactsNames.findNext();
-        }
-        return Container;
-    }
-
-    @Override
-    public int compareTo(Events o) {
-        return this.eventTitle.compareToIgnoreCase(o.eventTitle);
-    }
-
-}
+    import java.util.Date;  
+      
+    /* 
+    Events: This class will represent events or appointment that can be scheduled with a contact. It  
+    should have fields for the event title, date and time, location, and the contact involved in this  
+    event. 
+    */  
+      
+    public class Events implements Comparable<Events> {  
+        String title;  
+        Date date;//2023/11/24  
+        String time;  
+        String location;  
+        boolean EventType;  // event true , appointment = false;  
+        LinkedList <String> contacts_names;//if event have many contact  
+      
+        public Events() {  
+            this.title = "";  
+            this.date = null;  
+            this.time = "";  
+            this.location = "";  
+            this.EventType = true;  
+            this.contacts_names = new LinkedList<String> ();  
+        }  
+          
+        public Events(String title, String date, String time, String location, boolean t, String contact) {  
+            this.title = title;  
+            this.date = new Date(date);  
+            this.time = time;  
+            this.location = location;  
+            this.EventType =t;  
+            this.contacts_names = new LinkedList<String> ();  
+            contacts_names.addSort(contact);  
+        }  
+      
+        public boolean addContact (String contact)  
+        {                    
+            if ((this.EventType == true) || ((this.EventType == false)&&(contacts_names.isEmpty())))
+                return contacts_names.addSort(contact);  
+              
+            System.out.println("Could not add more than contact for an appoinment");  
+            return false;  
+        }  
+      
+        public boolean removeContact(String contact)  
+        {  
+                boolean name = contacts_names.remove(contact);  
+                if ( name)  
+                    return true;   
+                return false;  
+        }  
+       
+        @Override  
+        public String toString() {  
+            String EventT = (this.EventType == true)? "Events ": "Appoinment ";       
+            String str = "\n" + EventT + " title: " + title +  
+                        "\n " + EventT + "  date and time (MM/DD/YYYY HH:MM): " + date + time +  
+                       "\n" + EventT + " location: " + location +  
+                       "\nType: " + EventT +  
+                        "\nContacts names:   \n" + contacts_names.toString();  
+                      
+              return str;  
+        }  
+          
+          
+        @Override  
+        public int compareTo(Events obj) {  
+            try {  
+                return (this.title.compareToIgnoreCase(obj.title)); //0 eqal + big - less  
+            }  
+            catch (Exception e)  
+            {  
+                 //To change body of generated methods, choose Tools | Templates.  
+                throw new UnsupportedOperationException("Not supported yet.");  
+            }  
+        }  
+      
+        public boolean compareToSameEvent(Events obj) {  
+            try {  
+                return ((this.title.compareToIgnoreCase(obj.title) == 0) &&   
+                        (this.date.compareTo(obj.date) == 0) &&  
+                        (this.time.compareToIgnoreCase(obj.time) == 0) && (this.EventType == obj.EventType));  
+            }  
+            catch (Exception e)  
+            {  
+                 //To change body of generated methods, choose Tools | Templates.  
+                throw new UnsupportedOperationException("Not supported yet.");  
+            }  
+        }  
+          
+    }  
