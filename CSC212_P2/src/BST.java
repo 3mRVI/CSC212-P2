@@ -72,7 +72,7 @@
                 current = q;  
                 return false;  
         }  
-        public boolean insert(String name, Contact val) {  
+        public boolean addSort(String name, Contact val) {  
                 BSTNode  p;  
                 BSTNode  q = current;  
       
@@ -148,7 +148,7 @@
         {  
                 String key1 = key;   
                 remove_key(key1);  
-                 return insert(key1, data);  
+                 return addSort(key1, data);  
         }  
       
         //Method removeKey: iterative    

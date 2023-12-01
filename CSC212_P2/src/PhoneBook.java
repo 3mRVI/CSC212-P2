@@ -13,45 +13,45 @@
         public static BST  contacts = new BST ();  
         public static LinkedList <Events> events = new LinkedList <Events>();  
           
-        public static int menu ()  
-        {  
-            System.out.println("Please choose an option:");  
-            System.out.println("1. Add a contact");  
-            System.out.println("2. Search for a contact");  
-            System.out.println("3. Delete a contact");  
-            System.out.println("4. Schedule an event/Appoinment");  
-            System.out.println("5. Print event details");  
-            System.out.println("6. Print contacts by first name");  
-            System.out.println("7. Print all events alphabetically");  
-            System.out.println("8. Exit");  
-            System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();  
+        // public static int menu ()  
+        // {  
+        //     System.out.println("Please choose an option:");  
+        //     System.out.println("1. Add a contact");  
+        //     System.out.println("2. Search for a contact");  
+        //     System.out.println("3. Delete a contact");  
+        //     System.out.println("4. Schedule an event/Appoinment");  
+        //     System.out.println("5. Print event details");  
+        //     System.out.println("6. Print contacts by first name");  
+        //     System.out.println("7. Print all events alphabetically");  
+        //     System.out.println("8. Exit");  
+        //     System.out.println("\nEnter your choice: ");  
+        //     int choice = input.nextInt();  
               
-            return choice;  
-        }  
+        //     return choice;  
+        // }  
           
-        public static int submenu2()  
-        {  
-            System.out.println("Enter search criteria:");  
-            System.out.println("1. Name");  
-            System.out.println("2. Phone Number");  
-            System.out.println("3. Email Address");  
-            System.out.println("4. Address");  
-            System.out.println("5. Birthday");  
-            System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();  
-            return choice;  
-        }  
+        // public static int submenu2()  
+        // {  
+        //     System.out.println("Enter search criteria:");  
+        //     System.out.println("1. Name");  
+        //     System.out.println("2. Phone Number");  
+        //     System.out.println("3. Email Address");  
+        //     System.out.println("4. Address");  
+        //     System.out.println("5. Birthday");  
+        //     System.out.println("\nEnter your choice: ");  
+        //     int choice = input.nextInt();  
+        //     return choice;  
+        // }  
       
-        public static int submenu5()  
-        {  
-            System.out.println("Enter search criteria:");  
-            System.out.println("1. contact name");  
-            System.out.println("2. Events tittle");  
-            System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();  
-            return choice;  
-        }  
+        // public static int submenu5()  
+        // {  
+        //     System.out.println("Enter search criteria:");  
+        //     System.out.println("1. contact name");  
+        //     System.out.println("2. Events tittle");  
+        //     System.out.println("\nEnter your choice: ");  
+        //     int choice = input.nextInt();  
+        //     return choice;  
+        // }  
       
         public static int submenu6()  
         {  
@@ -96,14 +96,21 @@
             System.out.print("Enter any notes for the contact: ");  
             c.notes = input.nextLine();  
               
-            if (contacts.insert(c.name, c))  
+            if (contacts.addSort(c.name, c))  
                 System.out.println("Contact added successfully!");  
         }  
       
         //2. Search for a contact  
         public static void SearchContact()  
         {  
-            int choice = submenu2();  
+            System.out.println("Enter search criteria:"); 
+             System.out.println("1. Name");  
+            System.out.println("2. Phone Number");  
+            System.out.println("3. Email Address");  
+            System.out.println("4. Address");  
+            System.out.println("5. Birthday");  
+            System.out.println("\nEnter your choice: ");   
+            int choice = input.nextInt();  
             if (contacts.empty())  
                 System.out.println("Contact not found!");  
             else  
@@ -253,7 +260,11 @@
             boolean event_Updated = false;  
             boolean Added_Event_To_Contact = false;  
               
-            int choice = submenu6();  
+             System.out.println("Enter type:");  
+            System.out.println("1. event");  
+            System.out.println("2. appointment");  
+            System.out.println("\nEnter your choice: ");  
+            int choice = input.nextInt();  
             String type;  
             if ( choice == 1 )  
             {  
@@ -294,15 +305,15 @@
                                     && (events.retrieve().EventType== e.EventType))  
                             {  
                                 Events eventFound = events.retrieve();  
-                                eventFound.contacts_names.insert(c.name);  
+                                eventFound.contacts_names.addSort(c.name);  
                                 events.update(eventFound);  
                                 event_Updated = true;  
                             }  
                               
                             if (! event_Updated)    
                             {  
-                                    e.contacts_names.insert(c.name);  
-                                    events.insert(e);  
+                                    e.contacts_names.addSort(c.name);  
+                                    events.addSort(e);  
                             }  
                             System.out.println("Events scheduled successfully for " + c.name + "  !");  
                         }  
@@ -310,7 +321,7 @@
                             System.out.println("Contact has conflict Events for " + c.name + "  !");  
                     }  
                     else  
-                        System.out.println("Cantcat " + c.name + " not found !");                                     
+                        System.out.println("Contact " + c.name + " not found !");                                     
                  } // end for   
             }  // end schedule event  
             else   
@@ -352,8 +363,8 @@
                         {  
                             // event added to contact  
                             contacts.update(c.name,c);  
-                            e.contacts_names.insert(c.name);  
-                            events.insert(e);  
+                            e.contacts_names.addSort(c.name);  
+                            events.addSort(e);  
                             System.out.println("Appoinment scheduled successfully!   ");  
                         }  
                         else  
@@ -367,7 +378,11 @@
           
         //5. Print event details  
         public static void PrintEvent(){   
-            int choice = submenu5();  
+              System.out.println("Enter search criteria:");  
+            System.out.println("1. contact name");  
+            System.out.println("2. Events tittle");  
+            System.out.println("\nEnter your choice: ");  
+            int choice = input.nextInt();  
             switch ( choice )  
             {  
                 case 1:  
@@ -384,6 +399,9 @@
                         System.out.println("Contact found !");  
                         c = contacts.retrieve();  
       
+                        if (c.events.isEmpty())  
+                            System.out.println("No events found for this contact !");  
+                         }  
                         c.events.findFirst();  
                         for (int i = 0 ; i < c.events.size ; i++)  
                         {  
@@ -396,9 +414,6 @@
                                 System.out.println(events.retrieve().toString());  
                             c.events.findNext();  
                         }  
-                        if (c.events.isEmpty())  
-                            System.out.println("No events found for this contact !");  
-                         }  
                     else  
                         System.out.println("Contact not found !");  
                     }  
@@ -463,10 +478,20 @@
             // TODO code application logic here  
               
             System.out.println("Welcome to the BST Phonebook!");  
-            int choice;  
+            int userInput;
             do {  
-                choice = menu();  
-                switch (choice)  
+             System.out.println("Please choose an option:");  
+            System.out.println("1. Add a contact");  
+            System.out.println("2. Search for a contact");  
+            System.out.println("3. Delete a contact");  
+            System.out.println("4. Schedule an event/Appoinment");  
+            System.out.println("5. Print event details");  
+            System.out.println("6. Print contacts by first name");  
+            System.out.println("7. Print all events alphabetically");  
+            System.out.println("8. Exit");  
+            System.out.println("\nEnter your choice: ");  
+             userInput = input.nextInt();  
+                switch (userInput)  
                 {  
                     case 1:  
                         AddContact();  
@@ -503,7 +528,7 @@
                         System.out.println("Bad choice! Try again");  
                 }  
                 System.out.println("\n\n");  
-            }while (choice != 8);  
+            }while (userInput != 8);  
         }  
               
     }  

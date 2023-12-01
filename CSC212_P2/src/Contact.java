@@ -7,12 +7,8 @@
     */  
       
     public class Contact implements Comparable<Contact> {  
-        String name;  
-        String phonenumber;  
-        String emailaddress;  
-        String address;  
+        String name, phonenumber, emailaddress, address, notes;  
         Date birthday; //20/11/2023  
-        String notes;  
         LinkedList<Events> events ;   
          
         public Contact() {  
