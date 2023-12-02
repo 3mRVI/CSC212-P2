@@ -109,6 +109,7 @@ import java.util.Scanner;
         //2. Search for a contact  
         public static void SearchContact()  
         {  
+            
             System.out.println("Enter search criteria:"); 
              System.out.println("1. Name");  
             System.out.println("2. Phone Number");  
@@ -117,6 +118,7 @@ import java.util.Scanner;
             System.out.println("5. Birthday");  
             System.out.println("\nEnter your choice: ");   
             int choice = input.nextInt();  
+        
             if (contacts.empty())  
                 System.out.println("There is no contacts!");  
             else  
@@ -282,11 +284,14 @@ import java.util.Scanner;
                 System.out.print("Enter contacts name separated by a comma: ");  
                 String line = input.nextLine();  
                 String [] names = line.split(",");  
-                  
+                  try{
                 System.out.print("Enter event date and time (MM/DD/YYYY HH:MM): ");  
-                e.date = new Date (input.next());  
-      
+                e.date = new Date (input.next()); 
                 e.time = input.next();  
+                    }  catch(IllegalArgumentException ec){
+                System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
+                return; 
+                    }
       
                 System.out.print("Enter event location: ");  
                 input.nextLine();  
@@ -344,12 +349,13 @@ import java.util.Scanner;
                 if ( ! contacts.empty() && contacts.findkey(c.name) == true)  
                 {  
                     c = contacts.retrieve();  
-                      
+                      try{
                     System.out.print("Enter appoinment date and time (MM/DD/YYYY HH:MM): ");  
                     e.date = new Date (input.next());  
-      
                     e.time = input.next();  
-      
+                }catch(IllegalArgumentException ec){
+                System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
+                return;}
                     System.out.print("Enter appoinment location: ");  
                     input.nextLine();  
                     e.location = input.nextLine();  
