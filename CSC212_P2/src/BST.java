@@ -52,8 +52,7 @@
         }  
       
         public boolean findkey(String tkey) {  
-                BSTNode  p = root;  
-                BSTNode  q = root;  
+                BSTNode  p = root, q = root;  
       
                 if(empty())  
                         return false;  
@@ -73,8 +72,7 @@
                 return false;  
         }  
         public boolean addSort(String name, Contact val) {  
-                BSTNode  p;  
-                BSTNode  q = current;  
+                BSTNode  p, q = current;  
       
                 if(findkey(name)) {  
                         current = q;  // findkey() modified current  

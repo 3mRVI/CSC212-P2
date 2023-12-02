@@ -53,15 +53,15 @@
         //     return choice;  
         // }  
       
-        public static int submenu6()  
-        {  
-            System.out.println("Enter type:");  
-            System.out.println("1. event");  
-            System.out.println("2. appointment");  
-            System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();  
-            return choice;  
-        }  
+        // public static int submenu6()  
+        // {  
+        //     System.out.println("Enter type:");  
+        //     System.out.println("1. event");  
+        //     System.out.println("2. appointment");  
+        //     System.out.println("\nEnter your choice: ");  
+        //     int choice = input.nextInt();  
+        //     return choice;  
+        // }  
       
           
         //1. Add a contact  
@@ -80,6 +80,7 @@
             c.phonenumber = input.nextLine();  
               
             if (!contacts.empty() && (contacts.SearchPhone(c.phonenumber)))  
+
             {  
                 System.out.println("phone number found!");  
                 return;  
@@ -112,7 +113,7 @@
             System.out.println("\nEnter your choice: ");   
             int choice = input.nextInt();  
             if (contacts.empty())  
-                System.out.println("Contact not found!");  
+                System.out.println("There is no contacts!");  
             else  
             {  
                 switch ( choice )  
@@ -212,7 +213,7 @@
             else  
             {  
                   
-                if ( ! contacts.findkey(c.name))  
+                if ( contacts.findkey(c.name)==false)  
                     System.out.println("Contact not found!");  
                 else  
                 {  
@@ -221,7 +222,7 @@
                     if (! c.events.isEmpty())  
                     {  
                         c.events.findFirst();  
-                        for ( int i = 0 ; i < c.events.size ; i++)  
+                        while( c.events.current != null) 
                         {  
                             Events e = c.events.retrieve();  
                             if ( (!events.isEmpty()) && events.search(e)   
@@ -403,7 +404,7 @@
                             System.out.println("No events found for this contact !");  
                          }  
                         c.events.findFirst();  
-                        for (int i = 0 ; i < c.events.size ; i++)  
+                        while( c.events.current != null) 
                         {  
                             Events e = c.events.retrieve();  
                             if (!events.isEmpty() && events.search(e)   
@@ -414,8 +415,7 @@
                                 System.out.println(events.retrieve().toString());  
                             c.events.findNext();  
                         }  
-                    else  
-                        System.out.println("Contact not found !");  
+                        
                     }  
                     else  
                         System.out.println("Contact not found !");  
@@ -432,7 +432,7 @@
                    if (! events.isEmpty())  
                     {  
                         events.findFirst();  
-                        for (int i = 0 ; i < events.size ; i++)  
+                        while( events.current != null) 
                         {     
                             if (events.retrieve().compareTo(e) == 0)  
                             {  
@@ -478,7 +478,7 @@
             // TODO code application logic here  
               
             System.out.println("Welcome to the BST Phonebook!");  
-            int userInput;
+            int userInput=0;
             do {  
              System.out.println("Please choose an option:");  
             System.out.println("1. Add a contact");  
