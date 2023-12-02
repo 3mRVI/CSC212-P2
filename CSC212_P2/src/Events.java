@@ -12,7 +12,7 @@
         String time;  
         String location;  
         boolean EventType;  // event true , appointment = false;  
-        LinkedList <String> contacts_names;//if event have many contact  
+        LinkedList <String> contactsNames;//if event have many contact  
       
         public Events() {  
             this.title = "";  
@@ -20,7 +20,7 @@
             this.time = "";  
             this.location = "";  
             this.EventType = true;  
-            this.contacts_names = new LinkedList<String> ();  
+            this.contactsNames = new LinkedList<String> ();  
         }  
           
         public Events(String title, String date, String time, String location, boolean t, String contact) {  
@@ -29,14 +29,14 @@
             this.time = time;  
             this.location = location;  
             this.EventType =t;  
-            this.contacts_names = new LinkedList<String> ();  
-            contacts_names.addSort(contact);  
+            this.contactsNames = new LinkedList<String> ();  
+            contactsNames.addSort(contact);  
         }  
       
         public boolean addContact (String contact)  
         {                    
-            if ((this.EventType == true) || ((this.EventType == false)&&(contacts_names.isEmpty())))
-                return contacts_names.addSort(contact);  
+            if ((this.EventType == true) || ((this.EventType == false)&&(contactsNames.isEmpty())))
+                return contactsNames.addSort(contact);  
               
             System.out.println("Could not add more than contact for an appoinment");  
             return false;  
@@ -44,7 +44,7 @@
       
         public boolean removeContact(String contact)  
         {  
-                boolean name = contacts_names.remove(contact);  
+                boolean name = contactsNames.remove(contact);  
                 if ( name)  
                     return true;   
                 return false;  
@@ -52,40 +52,24 @@
        
         @Override  
         public String toString() {  
-            String EventT = (this.EventType == true)? "Events ": "Appoinment ";       
+            String EventT = (this.EventType == true)? "Events ": "Appoinment ";    
+            String rr="";   
             String str = "\n" + EventT + " title: " + title +  
                         "\n " + EventT + "  date and time (MM/DD/YYYY HH:MM): " + date + time +  
                        "\n" + EventT + " location: " + location +  
                        "\nType: " + EventT +  
-                        "\nContacts names:   \n" + contacts_names.toString();  
-                      
-              return str;  
+                        "\nContacts names:   \n";
+                        contactsNames.findFirst();
+                        while(contactsNames.current !=null){ 
+                        rr+=contactsNames.retrieve()+", ";  
+                        contactsNames.findNext();
+                        }
+              return str+rr;  
         }  
           
           
         @Override  
         public int compareTo(Events obj) {  
-            try {  
                 return (this.title.compareToIgnoreCase(obj.title)); //0 eqal + big - less  
-            }  
-            catch (Exception e)  
-            {  
-                 //To change body of generated methods, choose Tools | Templates.  
-                throw new UnsupportedOperationException("Not supported yet.");  
-            }  
         }  
-      
-        public boolean compareToSameEvent(Events obj) {  
-            try {  
-                return ((this.title.compareToIgnoreCase(obj.title) == 0) &&   
-                        (this.date.compareTo(obj.date) == 0) &&  
-                        (this.time.compareToIgnoreCase(obj.time) == 0) && (this.EventType == obj.EventType));  
-            }  
-            catch (Exception e)  
-            {  
-                 //To change body of generated methods, choose Tools | Templates.  
-                throw new UnsupportedOperationException("Not supported yet.");  
-            }  
-        }  
-          
-    }  
+ }  

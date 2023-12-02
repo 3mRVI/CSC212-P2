@@ -33,24 +33,31 @@
       
         @Override  
         public String toString() {  
-            return "\nName: " + name +  
+            String cont="";
+            String cont1="";
+            cont= "\nName: " + name +  
                         "\nPhone Number: " + phonenumber +  
                         "\nEmail Address: " + emailaddress +  
                         "\nAddress: " +  address +  
                         "\nBirthday: " + birthday +  
                         "\nNotes: " + notes +   
-                        "\nEvents : " + events.toString();  
-      
+                        "\nEvents : ";  
+                        events.findFirst();
+                        while (events.current !=null) {
+                            cont1+= events.retrieve();
+                            events.findNext();
+                        }
+            return cont+cont1;
         }  
       
         public boolean addEvent( Events e)  
         {  
     //        if ((e.EventType) || (!e.EventType && e.contacts_names.size==0))  
-            {  
+    {  
+                events.findFirst();  
                     if (! events.isEmpty())  
                     {  
-                        events.findFirst();  
-                        while(! events.isEmpty()) 
+                        while( events.current !=null) 
                         {   
                             if ((events.retrieve().date.compareTo(e.date) == 0)   
                                     && (events.retrieve().time.compareTo(e.time) == 0))  
@@ -151,4 +158,5 @@
                  //To change body of generated methods, choose Tools | Templates.  
                 throw new UnsupportedOperationException("Not supported yet.");  
             }  
-        }  }  
+        } 
+     }  

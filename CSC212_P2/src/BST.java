@@ -1,36 +1,6 @@
     import java.util.Date;  
       
     public class BST<K extends Comparable<K>,T> {  
-    //     //================================================================================  
-    //     class BSTNode <K extends Comparable<K>,T> {  
-    //             public K key;    
-    //             public T data;  
-    //             public BSTNode<K,T> left, right;  
-      
-    //             /** Creates a new instance of BTNode */  
-    //             public BSTNode() {  
-    //                     left = right = null;  
-    //             }  
-      
-    //             public BSTNode(K key, T data) {  
-    //                     this.key = key  ;    
-    //                     this.data = data;  
-    //                     left = right = null;  
-    //             }  
-      
-    //             public BSTNode(K key, T data, BSTNode<K,T> l, BSTNode<K,T> r){  
-    //                     this.key = key  ;    
-    //                     this.data = data;  
-    //                     left = l;  
-    //                     right = r;  
-    //             }  
-                  
-    //         @Override  
-    //         public String toString() {  
-    //             return " ["+ "key=" + key + ", data=" + data + "] ";  
-    //         }  
-      
-    //     }  
         //================================================================================  
         BSTNode root, current;  
       
@@ -226,28 +196,28 @@
         /*  
         In order traversal 
         */  
-        @Override  
-        public String toString()   
-        {  
-            String str = "";  
-            if ( root == null)  
-                return str;  
-            str = recin_order_Traversal ( root , str );  
-            return str;  
-        }  
+        // @Override  
+        // public String toString()   
+        // {  
+        //     String str = "";  
+        //     if ( root == null)  
+        //         return str;  
+        //     str = recin_order_Traversal ( root , str );  
+        //     return str;  
+        // }  
           
-        private String recin_order_Traversal (BSTNode p ,String str)  
-        {  
-            if (p == null)  
-                return "";  
-            else  
-            {  
-                str = recin_order_Traversal(p.left , str);  
-                str += p.data.toString() + "    ";  
-                str += recin_order_Traversal(p.right, str);  
-            }  
-            return str;  
-        }  
+        // private String recin_order_Traversal (BSTNode p ,String str)  
+        // {  
+        //     if (p == null)  
+        //         return "";  
+        //     else  
+        //     {  
+        //         str = recin_order_Traversal(p.left , str);  
+        //         str += p.data.toString() + "    ";  
+        //         str += recin_order_Traversal(p.right, str);  
+        //     }  
+        //     return str;  
+        // }  
       
         //==============================================  
         // Search contcat phone in the BST O(n)  
@@ -260,10 +230,9 @@
         {  
             if (p == null)  
                 return false;  
-            else    if (((Contact)p.data).compareToPhone(phone) == 0)  
+            else    if ((p.data).compareToPhone(phone) == 0)  
             {  
                 current = p;  
-                  
                 return true;  
             }  
               
@@ -273,56 +242,56 @@
         //==============================================  
         // Search contcat email in the BST O(n)  
         //==============================================  
-        public void SearchEmail(String email)  
+        public boolean SearchEmail(String email)  
         {  
-            SearchEmail_rec (root, email);  
+           return SearchEmail_rec(root, email);  
         }  
-        private void SearchEmail_rec (BSTNode  p, String email)  
+        private boolean SearchEmail_rec (BSTNode  p, String email)  
         {  
             if (p == null)  
-                return;  
+                return false;  
               
-            else    if (((Contact)p.data).compareToEmail(email) == 0)  
+            else    if ((p.data).compareToEmail(email) == 0) {
                 System.out.println(p.data);  
-              
-            SearchEmail_rec(p.left , email);  
-            SearchEmail_rec(p.right, email);  
+                return true;
+            }
+            return(SearchEmail_rec(p.left , email)||  SearchEmail_rec(p.right, email));  
         }  
           
         //==============================================  
         // Search contcat address in the BST O(n)  
         //==============================================  
-        public void SearchAddress(String address)  
+        public boolean SearchAddress(String address)  
         {  
-            SearchAddress_rec (root, address);  
+           return SearchAddress_rec (root, address);  
         }  
-        private void SearchAddress_rec (BSTNode p, String address)  
+        private boolean SearchAddress_rec (BSTNode p, String address)  
         {  
             if (p == null)  
-                return ;  
-            else    if (((Contact)p.data).compareToAddress(address) == 0)  
+                return false;  
+            else    if ((p.data).compareToAddress(address) == 0) {
                 System.out.println(p.data);  
-              
-            SearchAddress_rec(p.left , address);  
-            SearchAddress_rec(p.right, address);  
+                return true;
+            }
+            return(SearchAddress_rec(p.left , address)||SearchAddress_rec(p.right, address));  
         }  
           
         //==============================================  
         // Search contcat birthday in the BST O(n)  
         //==============================================  
-        public void SearchBirthday(Date birthday)  
+        public boolean SearchBirthday(Date birthday)  
         {  
-            SearchBirthday_rec (root, birthday);  
+           return SearchBirthday_rec (root, birthday);  
         }  
-        private void SearchBirthday_rec (BSTNode  p, Date birthday)  
+        private boolean SearchBirthday_rec (BSTNode  p, Date birthday)  
         {  
             if (p == null)  
-                return ;  
-            else    if (((Contact)p.data).compareToBirthday(birthday) == 0)  
+                return false;  
+            else    if ((p.data).compareToBirthday(birthday) == 0) {
                 System.out.println(p.data);  
-              
-            SearchBirthday_rec(p.left , birthday);  
-            SearchBirthday_rec(p.right, birthday);  
+                return true;
+            }
+            return(SearchBirthday_rec(p.left , birthday)|| SearchBirthday_rec(p.right, birthday));  
         }  
       
         //==============================================  
@@ -336,7 +305,7 @@
         {  
             if (p == null)  
                 return ;  
-            else    if (((Contact)p.data).compareFirstName(name) == 0)  
+            else    if ((p.data).compareFirstName(name) == 0)  
                 System.out.println(p.data);  
              
             SearchSameFirstName_rec(p.left , name);  
