@@ -50,7 +50,7 @@
             return cont+cont1;
         }  
       
-        public boolean addEvent( Events e)  
+        public boolean checkConflict( Events e)  
         {  
     //        if ((e.EventType) || (!e.EventType && e.contacts_names.size==0))  
     {  

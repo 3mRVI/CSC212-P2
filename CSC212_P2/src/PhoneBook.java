@@ -211,16 +211,17 @@ import java.util.Scanner;
         //3. Delete a contact  
         public static void DeleteContact()  
         {  
+            if (contacts.empty()) 
+            {
+                System.out.println("there is no contacts! please add a contact first"); 
+                return;
+            } 
             Contact c = new Contact();  
               
             System.out.print("Enter the contact\'s name: ");  
             input.nextLine();  
             c.name = input.nextLine();  
              
-            if (contacts.empty())  
-                System.out.println("Contact not found!");  
-            else  
-            {  
                   
                 if ( contacts.findkey(c.name)==false)  
                     System.out.println("Contact not found!");  
@@ -257,8 +258,7 @@ import java.util.Scanner;
                     }  
                     System.out.println("Contact Deleted Successfully !");  
                     System.out.println(c);  
-                }      
-            }          
+                }                
         }  
           
         //4. Schedule an event  
@@ -311,7 +311,7 @@ import java.util.Scanner;
                         c = contacts.retrieve();  
                         // Added_Event_To_Contact =c.events.addSort(e);
                         
-                        if (c.addEvent(e))  
+                        if (c.checkConflict(e))  
                         {  
                             c.events.addSort(e);
                             // event added to contact  
@@ -379,7 +379,7 @@ import java.util.Scanner;
                     else  
                     {  
                         
-                        if (c.addEvent(e))  
+                        if (c.checkConflict(e))  
                         {  
                             // event added to contact  
                             c.events.addSort(e);
@@ -405,6 +405,12 @@ import java.util.Scanner;
           
         //5. Print event details  
         public static void PrintEvent(){   
+            if(contacts.empty()||events.isEmpty())
+            {
+                System.out.println("There is no events!");
+                return;
+            }
+
               System.out.println("Enter search criteria:");  
             System.out.println("1. contact name");  
             System.out.println("2. Events tittle");  
