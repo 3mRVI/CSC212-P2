@@ -201,9 +201,7 @@ import java.util.Scanner;
                     return;
                 }
             Contact C1 = new Contact();  
-            Events E1 = new Events();  
-            boolean flag = false;  
-
+            Events E1 = new Events();   
             System.out.println("Enter type:");  
             System.out.println("1. event");  
             System.out.println("2. appointment");  
@@ -250,7 +248,6 @@ import java.util.Scanner;
                                 Events eventFound = events.retrieve();  
                                 eventFound.contactsNames.addSort(C1.name);  
                                 events.update(eventFound);  
-                                // flag = true;  
                             }  
                               
                             if (Events.checkSameEvent(events, E1)== false)    
@@ -265,9 +262,9 @@ import java.util.Scanner;
                     else  
                         System.out.println("Contact " + C1.name + " not found !");   
                         break;                                  
-            }  // end schedule event  
+            }  // Event Scheduled. 
             case 2: 
-            { // schedule appoinment  
+            { // schedule appointment  
                 E1.isEvent = false;  
                 System.out.print("Enter appointment title: ");  
                 input.nextLine();  
@@ -311,14 +308,14 @@ import java.util.Scanner;
                 else  
                     System.out.println("contact not found !"); 
                     break; 
-            } // end schedule appoinment    
+            } // Appointment scheduled  
             default:{
                 System.out.println("wrong input try again!");
                 break;
             }
         }      
         }  
-
+        // method searches for an event and print its details
         public static void PrintEvent(){   
             if(contacts.empty()||events.isEmpty())
             {
@@ -434,7 +431,7 @@ import java.util.Scanner;
             System.out.println("6. Print contacts by first name");  
             System.out.println("7. Print all events alphabetically");  
             System.out.println("8. Exit");  
-            System.out.println("\nEnter your choice: ");  
+            System.out.print("\nEnter your choice: ");  
            
              userInput = input.nextInt();
                 

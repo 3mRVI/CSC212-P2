@@ -192,14 +192,12 @@
         }  
         return false; // Not found  
         }  
-     
-      
        
         public boolean SearchPhone(String phone)  
         {  
-            return SearchPhone_rec (root, phone);  
+            return SearchPhoneRec (root, phone);  
         }  
-        private boolean SearchPhone_rec (BSTNode  p, String phone)  
+        private boolean SearchPhoneRec (BSTNode  p, String phone)  
         {  
             if (p == null)  
                 return false;  
@@ -209,15 +207,15 @@
                 return true;  
             }  
               
-            return (SearchPhone_rec(p.left , phone) || SearchPhone_rec(p.right, phone));  
+            return (SearchPhoneRec(p.left , phone) || SearchPhoneRec(p.right, phone));  
         }//O(n)
       
        
         public void SearchEmail(String email)  
         {  
-            SearchEmail_rec (root, email);  
+            SearchEmailRec (root, email);  
         }  
-        private void SearchEmail_rec (BSTNode p, String email)  
+        private void SearchEmailRec (BSTNode p, String email)  
         {  
             if (p == null)  
                 return;  
@@ -225,55 +223,55 @@
             else    if (((Contact)p.data).compareToEmail(email) == 0)  
                 System.out.println(p.data);  
               
-            SearchEmail_rec(p.left , email);  
-            SearchEmail_rec(p.right, email);  
+            SearchEmailRec(p.left , email);  
+            SearchEmailRec(p.right, email);  
         }  
           //o(n)
         
         public void SearchAddress(String address)  
         {  
-            SearchAddress_rec (root, address);  
+            SearchAddressRec (root, address);  
         }  
-        private void SearchAddress_rec (BSTNode  p, String address)  
+        private void SearchAddressRec (BSTNode  p, String address)  
         {  
             if (p == null)  
                 return ;  
             else    if (((Contact)p.data).compareToAddress(address) == 0)  
                 System.out.println(p.data);  
               
-            SearchAddress_rec(p.left , address);  
-            SearchAddress_rec(p.right, address);  
+            SearchAddressRec(p.left , address);  
+            SearchAddressRec(p.right, address);  
         } //O(n) 
           
        
         public void SearchBirthday(Date birthday)  
         {  
-            SearchBirthday_rec (root, birthday);  
+            SearchBirthdayRec (root, birthday);  
         }  
-        private void SearchBirthday_rec (BSTNode  p, Date birthday)  
+        private void SearchBirthdayRec (BSTNode  p, Date birthday)  
         {  
             if (p == null)  
                 return ;  
             else    if (((Contact)p.data).compareToBirthday(birthday) == 0)  
                 System.out.println(p.data);  
               
-            SearchBirthday_rec(p.left , birthday);  
-            SearchBirthday_rec(p.right, birthday);  
+            SearchBirthdayRec(p.left , birthday);  
+            SearchBirthdayRec(p.right, birthday);  
         } //O(n)
        
         public void SearchSameFirstName(String name)  
         {  
-            SearchSameFirstName_rec (root, name.trim());  
+            SearchSameFirstNameRec (root, name.trim());  
         }  
-        private void SearchSameFirstName_rec (BSTNode p, String name)  
+        private void SearchSameFirstNameRec (BSTNode p, String name)  
         {  
             if (p == null)  
                 return ;  
             else    if ((p.data).compareFirstName(name) == 0)  
                 System.out.println(p.data);  
              
-            SearchSameFirstName_rec(p.left , name);  
-            SearchSameFirstName_rec(p.right, name);  
+            SearchSameFirstNameRec(p.left , name);  
+            SearchSameFirstNameRec(p.right, name);  
         }  //O(n)
       
     }  

@@ -3,7 +3,6 @@
                 public Contact data;  
                 public BSTNode left, right;  
       
-                /** Creates a new instance of BTNode */  
                 public BSTNode() {  
                         left = right = null;  
                 }  
@@ -19,14 +18,6 @@
                         this.data = data;  
                         left = l;  
                         right = r;  
-                }  
-                  
-            @Override  
-            public String toString() {  
-                return " ["+ "key=" + key + ", data=" + data + "] ";  
-            }  
-      
- 
+                }                    
         }  
-        //================================================================================  
   

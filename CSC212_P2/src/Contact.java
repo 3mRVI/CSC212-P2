@@ -43,44 +43,11 @@
                         }
             return cont+cont1;
         }  
-      
-    //     public boolean checkConflict( Events e)  
-    //     {  
-    // {  
-    //             events.findFirst();  
-    //                 if (! events.isEmpty())  
-    //                 {  
-    //                     while( events.current !=null) 
-    //                     {   
-    //                         if ((events.retrieve().date.compareTo(e.date) == 0)   
-    //                                 && (events.retrieve().time.compareTo(e.time) == 0))  
-    //                             return false;  
-    //                         events.findNext();
-    //                     }  
-    //               }  
-                  
-    //             return true;  
-    //         }  
-    //     }  
-      
-        // public boolean removeEvent( String etitle)  
-        // {  
-        //     if (events.isEmpty())  
-        //         return false;  
-        //    Events val = new Events();  
-        //    val.eventTitle = etitle;  
-        //     if (events.search(val))  
-        //     {  
-        //         events.remove(val);  
-        //         return true;  
-        //     }  
-        //     return false;  
-        // }  
           
         @Override  
-        public int compareTo(Contact o) {  
+        public int compareTo(Contact c) {  
          
-                return (this.name.compareToIgnoreCase(o.name));  
+                return (this.name.compareToIgnoreCase(c.name));  
             }  
       
       
@@ -106,8 +73,8 @@
                 return (this.dateOfBirth.compareTo(birthday) ) ;  
         }  
           
-        public int compareFirstName(String n) {  
-                String [] new_name = this.name.split(" ");  
-                return (new_name[0].trim().compareToIgnoreCase(n) ) ;  
+        public int compareFirstName(String fn) {  
+                String [] newfn = this.name.split(" ");  
+                return (newfn[0].trim().compareToIgnoreCase(fn) ) ;  
         } 
      }  
