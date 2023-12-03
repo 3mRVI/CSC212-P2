@@ -7,26 +7,26 @@
     */  
       
     public class Contact implements Comparable<Contact> {  
-        String name, phonenumber, emailaddress, address, notes;  
-        Date birthday; //20/11/2023  
+        String name, phoneNumber, emailAddress, address, notes;  
+        Date dateOfBirth; //20/11/2023  
         LinkedList<Events> events ;   
          
         public Contact() {  
             this.name = "";  
-            this.phonenumber = "";  
-            this.emailaddress = "";  
+            this.phoneNumber = "";  
+            this.emailAddress = "";  
             this.address = "";  
-            this.birthday = null;  
+            this.dateOfBirth = null;  
             this.notes = "";  
             events = new LinkedList<Events>();  
         }  
       
         public Contact(String name, String phonenumber, String emailaddress, String address, String birthday, String notes) {  
             this.name = name;  
-            this.phonenumber = phonenumber;  
-            this.emailaddress = emailaddress;  
+            this.phoneNumber = phonenumber;  
+            this.emailAddress = emailaddress;  
             this.address = address;  
-            this.birthday = new Date(birthday);  
+            this.dateOfBirth = new Date(birthday);  
             this.notes = notes;  
             events = new LinkedList<Events>();  
         }  
@@ -36,10 +36,10 @@
             String cont="";
             String cont1="";
             cont= "\nName: " + name +  
-                        "\nPhone Number: " + phonenumber +  
-                        "\nEmail Address: " + emailaddress +  
+                        "\nPhone Number: " + phoneNumber +  
+                        "\nEmail Address: " + emailAddress +  
                         "\nAddress: " +  address +  
-                        "\nBirthday: " + birthday +  
+                        "\nBirthday: " + dateOfBirth +  
                         "\nNotes: " + notes +   
                         "\nEvents : ";  
                         events.findFirst();
@@ -71,12 +71,12 @@
             //return false;  
         }  
       
-        public boolean removeEvent( String eTitle)  
+        public boolean removeEvent( String etitle)  
         {  
             if (events.isEmpty())  
                 return false;  
            Events val = new Events();  
-           val.title = eTitle;  
+           val.eventTitle = etitle;  
             if (events.search(val))  
             {  
                 events.remove(val);  
@@ -102,7 +102,7 @@
           
         public int compareToPhone(String Phone) {  
             try {  
-                return (this.phonenumber.compareToIgnoreCase(Phone));//0 exit  
+                return (this.phoneNumber.compareToIgnoreCase(Phone));//0 exit  
                                                                      //- less  
                                                                      //+ big  
             }  
@@ -115,7 +115,7 @@
       
         public int compareToEmail(String emailaddress) {  
             try {  
-                return (this.emailaddress.compareToIgnoreCase(emailaddress));//0 exit  
+                return (this.emailAddress.compareToIgnoreCase(emailaddress));//0 exit  
                                                                              //- less  
                                                                              //+ big  
             }  
@@ -139,7 +139,7 @@
       
         public int compareToBirthday(Date birthday) {  
             try {  
-                return (this.birthday.compareTo(birthday) ) ;  
+                return (this.dateOfBirth.compareTo(birthday) ) ;  
             }  
             catch (Exception e)  
             {  

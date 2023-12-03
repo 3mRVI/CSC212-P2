@@ -2,40 +2,40 @@
       
     /* 
     Events: This class will represent events or appointment that can be scheduled with a contact. It  
-    should have fields for the event title, date and time, location, and the contact involved in this  
+    should have fields for the event eventTitle, date and time, location, and the contact involved in this  
     event. 
     */  
       
     public class Events implements Comparable<Events> {  
-        String title;  
+        String eventTitle;  
         Date date;//2023/11/24  
         String time;  
         String location;  
-        boolean EventType;  // event true , appointment = false;  
+        boolean isEvent;  // event true , appointment = false;  
         LinkedList <String> contactsNames;//if event have many contact  
       
         public Events() {  
-            this.title = "";  
+            this.eventTitle = "";  
             this.date = null;  
             this.time = "";  
             this.location = "";  
-            this.EventType = true;  
+            this.isEvent = true;  
             this.contactsNames = new LinkedList<String> ();  
         }  
           
-        public Events(String title, String date, String time, String location, boolean t, String contact) {  
-            this.title = title;  
+        public Events(String eventTitle, String date, String time, String location, boolean t, String contact) {  
+            this.eventTitle = eventTitle;  
             this.date = new Date(date);  
             this.time = time;  
             this.location = location;  
-            this.EventType =t;  
+            this.isEvent =t;  
             this.contactsNames = new LinkedList<String> ();  
             contactsNames.addSort(contact);  
         }  
       
         public boolean addContact (String contact)  
         {                    
-            if ((this.EventType == true) || ((this.EventType == false)&&(contactsNames.isEmpty())))
+            if ((this.isEvent == true) || ((this.isEvent == false)&&(contactsNames.isEmpty())))
                 return contactsNames.addSort(contact);  
               
             System.out.println("Could not add more than contact for an appoinment");  
@@ -52,9 +52,9 @@
        
         @Override  
         public String toString() {  
-            String EventT = (this.EventType == true)? "Events ": "Appoinment ";    
+            String EventT = (this.isEvent == true)? "Events ": "Appoinment ";    
             String rr="";   
-            String str = "\n" + EventT + " title: " + title +  
+            String str = "\n" + EventT + " eventTitle: " + eventTitle +  
                         "\n " + EventT + "  date and time (MM/DD/YYYY HH:MM): " + date + time +  
                        "\n" + EventT + " location: " + location +  
                        "\nType: " + EventT +  
@@ -70,6 +70,6 @@
           
         @Override  
         public int compareTo(Events obj) {  
-                return (this.title.compareToIgnoreCase(obj.title)); //0 eqal + big - less  
+                return (this.eventTitle.compareToIgnoreCase(obj.eventTitle)); //0 eqal + big - less  
         }  
  }  
