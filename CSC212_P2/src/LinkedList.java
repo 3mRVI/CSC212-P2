@@ -1,3 +1,22 @@
+// CLASS: PhaseTwo.java
+
+// CSC212 Data structures - Project phase II
+
+// Fall 2023
+
+// EDIT DATE:
+
+// 
+
+// TEAM:
+
+// O.Y.A
+
+// AUTHORS:
+
+// Yazeed Aljarwan(443105683) Omar Alotabi (443101535) Abdullah Aldawood, (443105732) 
+
+// ***/
 public class LinkedList <T extends Comparable<T>>{
 	public Node<T> head;
 	public Node<T> current;

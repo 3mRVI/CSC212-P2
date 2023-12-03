@@ -1,8 +1,27 @@
-    import java.util.Date;  
+   // CLASS: PhaseTwo.java
+
+// CSC212 Data structures - Project phase II
+
+// Fall 2023
+
+// EDIT DATE:
+
+// 
+
+// TEAM:
+
+// O.Y.A
+
+// AUTHORS:
+
+// Yazeed Aljarwan(443105683) Omar Alotabi (443101535) Abdullah Aldawood, (443105732) 
+
+// ***/
+   import java.util.Date;  
       
     public class Contact implements Comparable<Contact> {  
         String name, phoneNumber, emailAddress, address, notes;  
-        Date dateOfBirth; //20/11/2023  
+        Date dateOfBirth;  
         LinkedList<Events> events ;   
          
         public Contact() {  

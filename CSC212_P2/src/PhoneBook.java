@@ -1,18 +1,37 @@
+// CLASS: PhaseTwo.java
+
+// CSC212 Data structures - Project phase II
+
+// Fall 2023
+
+// EDIT DATE:
+
+// 
+
+// TEAM:
+
+// O.Y.A
+
+// AUTHORS:
+
+// Yazeed Aljarwan(443105683) Omar Alotabi (443101535) Abdullah Aldawood, (443105732) 
+
+// ***/
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;  
       
 
     public class PhoneBook {  
-        public static Scanner input = new Scanner (System.in);  
+        public static Scanner keyboardInput = new Scanner (System.in);  
         public static BST contacts = new BST();  
         public static LinkedList <Events> events = new LinkedList <Events>();  
           
         public static void AddContact(){  
             Contact c = new Contact();  
             System.out.print("Enter the contact\'s name: ");  
-            input.nextLine();  
-            c.name = input.nextLine();  
+            keyboardInput.nextLine();  
+            c.name = keyboardInput.nextLine();  
               
             if (!contacts.empty() && contacts.findkey(c.name))  
             {  
@@ -20,7 +39,7 @@ import java.util.Scanner;
                     return;  
             }  
             System.out.print("Enter the contact's phone number:");  
-            c.phoneNumber = input.nextLine();  
+            c.phoneNumber = keyboardInput.nextLine();  
               
             if (!contacts.empty() && (contacts.SearchPhone(c.phoneNumber)))  
 
@@ -29,20 +48,20 @@ import java.util.Scanner;
                 return;  
             }  
             System.out.print("Enter the contact's email address: ");  
-            c.emailAddress = input.nextLine();  
+            c.emailAddress = keyboardInput.nextLine();  
               
             System.out.print("Enter the contact's address: ");  
-            c.address = input.nextLine();  
+            c.address = keyboardInput.nextLine();  
               
             System.out.print("Enter the contact's birthday: ");  
             try{
-            c.dateOfBirth = new Date(input.nextLine());  
+            c.dateOfBirth = new Date(keyboardInput.nextLine());  
             }catch(IllegalArgumentException e){
                 System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
                 return;
             }
             System.out.print("Enter any notes for the contact: ");  
-            c.notes = input.nextLine();  
+            c.notes = keyboardInput.nextLine();  
               
             if (contacts.addSort(c.name, c))  
                 System.out.println("Contact added successfully!");  
@@ -58,7 +77,7 @@ import java.util.Scanner;
             System.out.println("4. Address");  
             System.out.println("5. Birthday");  
             System.out.println("\nEnter your choice: ");   
-            int choice = input.nextInt();  
+            int choice = keyboardInput.nextInt();  
         
             if (contacts.empty())  
                 System.out.println("There is no contacts!");  
@@ -69,8 +88,8 @@ import java.util.Scanner;
                    case 1:  
                    {  
                         System.out.print("Enter the contact\'s name: ");  
-                        input.nextLine();  
-                        String name = input.nextLine();  
+                        keyboardInput.nextLine();  
+                        String name = keyboardInput.nextLine();  
                           
                         if (contacts.findkey(name))  
                         {  
@@ -85,8 +104,8 @@ import java.util.Scanner;
                    case 2:  
                    {  
                        System.out.print("Enter the contact's phone number:");  
-                       input.nextLine();  
-                        String phoneNum = input.nextLine();  
+                       keyboardInput.nextLine();  
+                        String phoneNum = keyboardInput.nextLine();  
 
                         if (contacts.SearchPhone(phoneNum))  
                         {  
@@ -101,8 +120,8 @@ import java.util.Scanner;
                    case 3:  
                    {  
                        System.out.print("Enter the contact's email address: ");  
-                       input.nextLine();  
-                        String emailaddress = input.nextLine();  
+                       keyboardInput.nextLine();  
+                        String emailaddress = keyboardInput.nextLine();  
                          
                         if (!contacts.empty())  
                         {  
@@ -117,8 +136,8 @@ import java.util.Scanner;
                    case 4:  
                    {  
                        System.out.print("Enter the contact's address: ");  
-                       input.nextLine();  
-                        String address = input.nextLine();  
+                       keyboardInput.nextLine();  
+                        String address = keyboardInput.nextLine();  
                         if (!contacts.empty() )  
                         {  
                             contacts.SearchAddress(address);  
@@ -132,7 +151,7 @@ import java.util.Scanner;
                    case 5:  
                    {  
                        System.out.print("Enter the contact's Birthday: ");  
-                        Date birthday = new Date(input.next());  
+                        Date birthday = new Date(keyboardInput.next());  
                         if (!contacts.empty() )  
                         {  
                             contacts.SearchBirthday(birthday);  
@@ -155,8 +174,8 @@ import java.util.Scanner;
             Contact delContact = new Contact();  
               
             System.out.print("Enter the contact\'s name: ");  
-            input.nextLine();  
-            delContact.name = input.nextLine();  
+            keyboardInput.nextLine();  
+            delContact.name = keyboardInput.nextLine();  
              
                   
                 if ( contacts.findkey(delContact.name)==false)  
@@ -206,30 +225,30 @@ import java.util.Scanner;
             System.out.println("1. event");  
             System.out.println("2. appointment");  
             System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();
+            int choice = keyboardInput.nextInt();
             switch(choice){
             case 1:  
             {  
                   
                 E1.isEvent = true;  
                 System.out.print("Enter event title: ");  
-                input.nextLine();  
-                E1.eventTitle = input.nextLine();  
+                keyboardInput.nextLine();  
+                E1.eventTitle = keyboardInput.nextLine();  
                   
                 System.out.print("Enter contacts name: ");  
-                C1.name= input.nextLine();  
+                C1.name= keyboardInput.nextLine();  
                   try{
                 System.out.print("Enter event date and time (MM/DD/YYYY HH:MM): ");  
-                E1.date = new Date (input.next()); 
-                E1.time = input.next();  
+                E1.date = new Date (keyboardInput.next()); 
+                E1.time = keyboardInput.next();  
                     }  catch(IllegalArgumentException ec){
                 System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
                 return; 
                     }
       
                 System.out.print("Enter event location: ");  
-                input.nextLine();  
-                E1.location = input.nextLine();  
+                keyboardInput.nextLine();  
+                E1.location = keyboardInput.nextLine();  
               
                     if ( contacts.findkey(C1.name) == true)  
                     {  
@@ -267,25 +286,25 @@ import java.util.Scanner;
             { // schedule appointment  
                 E1.isEvent = false;  
                 System.out.print("Enter appointment title: ");  
-                input.nextLine();  
-                E1.eventTitle = input.nextLine();  
+                keyboardInput.nextLine();  
+                E1.eventTitle = keyboardInput.nextLine();  
               
                 System.out.print("Enter contact name: ");  
-                C1.name = input.nextLine();  
+                C1.name = keyboardInput.nextLine();  
               
                 if ( contacts.findkey(C1.name) == true)  
                 {  
                     C1 = contacts.retrieve();  
                       try{
                     System.out.print("Enter appointment date and time (MM/DD/YYYY HH:MM): ");  
-                    E1.date = new Date (input.next());  
-                    E1.time = input.next();  
+                    E1.date = new Date (keyboardInput.next());  
+                    E1.time = keyboardInput.next();  
                 }catch(IllegalArgumentException ec){
                 System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
                 return;}
                     System.out.print("Enter appointment location: ");  
-                    input.nextLine();  
-                    E1.location = input.nextLine();  
+                    keyboardInput.nextLine();  
+                    E1.location = keyboardInput.nextLine();  
       
                     if (Events.checkSameEvent(events, E1)||Events.checkDatesConflict(events, E1))  
                     {  
@@ -302,7 +321,7 @@ import java.util.Scanner;
                             System.out.println("Appointment scheduled successfully! ");  
                         }  
                         else  
-                            System.out.println("Contact has conflict Events/Appoinment! ");  
+                            System.out.println("Contact has conflict Events/Appointment! ");  
                         }  
                 }      
                 else  
@@ -327,15 +346,15 @@ import java.util.Scanner;
             System.out.println("1. contact name");  
             System.out.println("2. Events title");  
             System.out.println("\nEnter your choice: ");  
-            int choice = input.nextInt();  
+            int choice = keyboardInput.nextInt();  
             switch ( choice )  
             {  
                 case 1:  
                 {  
                     Contact c = new Contact();  
                     System.out.print("Enter the contact name:  ");  
-                    input.nextLine();  
-                    c.name = input.nextLine();  
+                    keyboardInput.nextLine();  
+                    c.name = keyboardInput.nextLine();  
                       if (contacts.findkey(c.name) == true)  
                       {  
                         System.out.println("Contact found !");  
@@ -363,8 +382,8 @@ import java.util.Scanner;
                     Events E1 = new Events();  
                     int count=0;
                     System.out.print("Enter the event title:  ");  
-                    input.nextLine();  
-                    E1.eventTitle = input.nextLine();  
+                    keyboardInput.nextLine();  
+                    E1.eventTitle = keyboardInput.nextLine();  
                         events.findFirst();  
                         while( events.current != null) 
                         {     
@@ -391,7 +410,7 @@ import java.util.Scanner;
         public static void PrintContactsFirstName(){  
              
             System.out.print("Enter the first name:");  
-           String firstName = input.next().trim();  
+           String firstName = keyboardInput.next().trim();  
               
             if (contacts.empty())  
                 System.out.println("No Contacts found !");  
@@ -433,7 +452,7 @@ import java.util.Scanner;
             System.out.println("8. Exit");  
             System.out.print("\nEnter your choice: ");  
            
-             userInput = input.nextInt();
+             userInput = keyboardInput.nextInt();
                 
                 switch (userInput)  
                 {  
@@ -474,7 +493,7 @@ import java.util.Scanner;
                 System.out.println("\n\n");
                 
              } catch (InputMismatchException ex) {
-                System.out.println("please choose a number from 1 to 8.\n your choice was: " + input.nextLine());
+                System.out.println("please choose a number from 1 to 8.\n your choice was: " + keyboardInput.nextLine());
             }
         
             }while (userInput != 8);  

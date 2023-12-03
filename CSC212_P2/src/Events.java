@@ -1,11 +1,30 @@
-    import java.util.Date;  
+   // CLASS: PhaseTwo.java
+
+// CSC212 Data structures - Project phase II
+
+// Fall 2023
+
+// EDIT DATE:
+
+// 
+
+// TEAM:
+
+// O.Y.A
+
+// AUTHORS:
+
+// Yazeed Aljarwan(443105683) Omar Alotabi (443101535) Abdullah Aldawood, (443105732) 
+
+// ***/
+   import java.util.Date;  
     public class Events implements Comparable<Events> {  
         String eventTitle;  
         Date date; 
         String time;  
         String location;  
         boolean isEvent;  // event true , appointment = false;  
-        LinkedList <String> contactsNames;//if event has more than contact one contact
+        LinkedList <String> contactsNames;
       
         public Events() {  
             this.eventTitle = "";  
@@ -25,16 +44,6 @@
             this.contactsNames = new LinkedList<String> ();  
             contactsNames.addSort(contact);  
         }  
-      
-        public boolean addContact (String contact)  
-        {                    
-            if ((this.isEvent == true) || ((this.isEvent == false)&&(contactsNames.isEmpty())))
-                return contactsNames.addSort(contact);  
-              
-            System.out.println("Could not add more than contact for an appoinment");  
-            return false;  
-        }  
-      
         public boolean removeContact(String contact)  
         {  
                 boolean name = contactsNames.remove(contact);  

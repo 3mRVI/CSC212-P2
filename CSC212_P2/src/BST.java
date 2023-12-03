@@ -1,10 +1,27 @@
-    import java.util.Date;  
-      
-    public class BST<K extends Comparable<K>,T> {  
-        //================================================================================  
+
+// CLASS: PhaseTwo.java
+
+// CSC212 Data structures - Project phase II
+
+// Fall 2023
+
+// EDIT DATE:
+
+// 
+
+// TEAM:
+
+// O.Y.A
+
+// AUTHORS:
+
+// Yazeed Aljarwan(443105683) Omar Alotabi (443101535) Abdullah Aldawood, (443105732) 
+
+// ***/
+import java.util.Date;  
+    public class BST<K extends Comparable<K>,T> {    
         BSTNode root, current;  
-      
-        /** Creates a new instance of BST */  
+       
         public BST() {  
                 root = current = null;  
         }  
@@ -118,8 +135,7 @@
                 remove_key(key1);  
                  return addSort(key1, data);  
         }  
-      
-        //Method removeKey: iterative    
+          
         public boolean removeKey(String k) {  
         // Search   
         String k1 = k;        
