@@ -2,73 +2,15 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;  
       
-    /* 
-     This class will represent the phonebook application itself. It should have a field for  
-    the linked list ADT that stores the contacts and methods for interacting with the list (e.g., adding,  
-    searching, and deleting contacts). You will also need to schedule events and appointments with  
-    contacts. 
-    */  
-      
+
     public class PhoneBook {  
         public static Scanner input = new Scanner (System.in);  
         public static BST contacts = new BST();  
         public static LinkedList <Events> events = new LinkedList <Events>();  
           
-        // public static int menu ()  
-        // {  
-        //     System.out.println("Please choose an option:");  
-        //     System.out.println("1. Add a contact");  
-        //     System.out.println("2. Search for a contact");  
-        //     System.out.println("3. Delete a contact");  
-        //     System.out.println("4. Schedule an event/Appoinment");  
-        //     System.out.println("5. Print event details");  
-        //     System.out.println("6. Print contacts by first name");  
-        //     System.out.println("7. Print all events alphabetically");  
-        //     System.out.println("8. Exit");  
-        //     System.out.println("\nEnter your choice: ");  
-        //     int choice = input.nextInt();  
-              
-        //     return choice;  
-        // }  
-          
-        // public static int submenu2()  
-        // {  
-        //     System.out.println("Enter search criteria:");  
-        //     System.out.println("1. Name");  
-        //     System.out.println("2. Phone Number");  
-        //     System.out.println("3. Email Address");  
-        //     System.out.println("4. Address");  
-        //     System.out.println("5. Birthday");  
-        //     System.out.println("\nEnter your choice: ");  
-        //     int choice = input.nextInt();  
-        //     return choice;  
-        // }  
-      
-        // public static int submenu5()  
-        // {  
-        //     System.out.println("Enter search criteria:");  
-        //     System.out.println("1. contact name");  
-        //     System.out.println("2. Events tittle");  
-        //     System.out.println("\nEnter your choice: ");  
-        //     int choice = input.nextInt();  
-        //     return choice;  
-        // }  
-      
-        // public static int submenu6()  
-        // {  
-        //     System.out.println("Enter type:");  
-        //     System.out.println("1. event");  
-        //     System.out.println("2. appointment");  
-        //     System.out.println("\nEnter your choice: ");  
-        //     int choice = input.nextInt();  
-        //     return choice;  
-        // }  
-      
-          
-        //1. Add a contact  
         public static void AddContact(){  
             Contact c = new Contact();  
-            System.out.println("Enter the contact\'s name: ");  
+            System.out.print("Enter the contact\'s name: ");  
             input.nextLine();  
             c.name = input.nextLine();  
               
@@ -106,7 +48,6 @@ import java.util.Scanner;
                 System.out.println("Contact added successfully!");  
         }  
       
-        //2. Search for a contact  
         public static void SearchContact()  
         {  
             
@@ -145,9 +86,9 @@ import java.util.Scanner;
                    {  
                        System.out.print("Enter the contact's phone number:");  
                        input.nextLine();  
-                        String phonenumber = input.nextLine();  
+                        String phoneNum = input.nextLine();  
 
-                        if (contacts.SearchPhone(phonenumber))  
+                        if (contacts.SearchPhone(phoneNum))  
                         {  
                             System.out.println("Contact found!");  
                               
@@ -157,18 +98,19 @@ import java.util.Scanner;
                         System.out.println("The contact does not exist!");  
                    }  
                    break;  
-      
                    case 3:  
                    {  
                        System.out.print("Enter the contact's email address: ");  
                        input.nextLine();  
                         String emailaddress = input.nextLine();  
                          
-                            if(contacts.SearchEmail(emailaddress)){  
+                        if (!contacts.empty())  
+                        {  
+                            contacts.SearchEmail(emailaddress);  
                             System.out.println("Contact found!");  
                             break;  
                         }  
-                        System.out.println("The contact does not exist!");  
+                        System.out.println("Contacts could not found!");  
                    }                  
                    break;  
       
@@ -177,28 +119,23 @@ import java.util.Scanner;
                        System.out.print("Enter the contact's address: ");  
                        input.nextLine();  
                         String address = input.nextLine();  
-                        if (contacts.SearchAddress(address) )  
+                        if (!contacts.empty() )  
                         {  
+                            contacts.SearchAddress(address);  
                             System.out.println("Contact found!");  
                             break;  
                         }  
-                        System.out.println("The contact does not exist!");  
+                        System.out.println("Contacts could not found!");  
                    }                  
                    break;  
       
                    case 5:  
                    {  
-                    Date birthday;
                        System.out.print("Enter the contact's Birthday: ");  
-
-                       try{
-                         birthday = new Date(input.next());
-                       } catch(IllegalArgumentException e){
-                System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
-                return;
-            }
-                        if (contacts.SearchBirthday(birthday))  
+                        Date birthday = new Date(input.next());  
+                        if (!contacts.empty() )  
                         {  
+                            contacts.SearchBirthday(birthday);  
                             System.out.println("Contact found!");  
                             break;  
                         }  
@@ -208,7 +145,6 @@ import java.util.Scanner;
             }              
         }  
           
-        //3. Delete a contact  
         public static void DeleteContact()  
         {  
             if (contacts.empty()) 
@@ -216,52 +152,47 @@ import java.util.Scanner;
                 System.out.println("there is no contacts! please add a contact first"); 
                 return;
             } 
-            Contact c = new Contact();  
+            Contact delContact = new Contact();  
               
             System.out.print("Enter the contact\'s name: ");  
             input.nextLine();  
-            c.name = input.nextLine();  
+            delContact.name = input.nextLine();  
              
                   
-                if ( contacts.findkey(c.name)==false)  
+                if ( contacts.findkey(delContact.name)==false)  
                     System.out.println("Contact not found!");  
                 else  
                 {  
-                    c = contacts.retrieve();  
-                    contacts.removeKey(c.name);  
-                    if (! c.events.isEmpty())  
+                    delContact = contacts.retrieve();  
+                    contacts.removeKey(delContact.name);  
+                    if (delContact.events.isEmpty()== false)  
                     {  
-                        c.events.findFirst();  
-                        while( c.events.current != null) 
+                        delContact.events.findFirst();  
+                        while( delContact.events.current != null) 
                         {  
-                            Events e = c.events.retrieve();  
-                            if ( (!events.isEmpty()) && events.search(e)   
-                                    && (events.retrieve().date.compareTo(e.date)==0)   
-                                    && (events.retrieve().time.compareTo(e.time)==0)  
-                                    && (events.retrieve().location.compareTo(e.location)==0)  
-                                    && (events.retrieve().isEvent== e.isEvent))  
+                            Events e = delContact.events.retrieve();  
+                            if (Events.checkSameEvent(events, e))  
                             {  
                                 Events Update_Event = events.retrieve();  
                                   
-                                Update_Event.removeContact(c.name);  
+                                Update_Event.removeContact(delContact.name);  
                                 if (Update_Event.contactsNames.isEmpty())  
                                 {  
                                     events.remove(e);  
-                                    System.out.println("Delete event, No cantact particapate");  
+                                    System.out.println("Event deleted!");  
                                 }  
                                 else  
                                     events.update(Update_Event);  
                                   
                             }  
-                            c.events.findNext();  
+                            delContact.events.findNext();  
                         }  
                     }  
                     System.out.println("Contact Deleted Successfully !");  
-                    System.out.println(c);  
+                    System.out.println(delContact);  
                 }                
         }  
           
-        //4. Schedule an event  
         public static void ScheduleEvent()  
         {  
             if(contacts.empty())
@@ -269,11 +200,11 @@ import java.util.Scanner;
                     System.out.println("there is no contacts! please add a contact first");
                     return;
                 }
-            Contact c = new Contact();  
-            Events e = new Events();  
-              
-            boolean event_Updated = false;              
-             System.out.println("Enter type:");  
+            Contact C1 = new Contact();  
+            Events E1 = new Events();  
+            boolean flag = false;  
+
+            System.out.println("Enter type:");  
             System.out.println("1. event");  
             System.out.println("2. appointment");  
             System.out.println("\nEnter your choice: ");  
@@ -282,18 +213,17 @@ import java.util.Scanner;
             case 1:  
             {  
                   
-                e.isEvent = true;  
-                System.out.print("Enter event eventTitle: ");  
+                E1.isEvent = true;  
+                System.out.print("Enter event title: ");  
                 input.nextLine();  
-                e.eventTitle = input.nextLine();  
+                E1.eventTitle = input.nextLine();  
                   
-                System.out.print("Enter contacts name separated by a comma: ");  
-                String line = input.nextLine();  
-                String [] names = line.split(",");  
+                System.out.print("Enter contacts name: ");  
+                C1.name= input.nextLine();  
                   try{
                 System.out.print("Enter event date and time (MM/DD/YYYY HH:MM): ");  
-                e.date = new Date (input.next()); 
-                e.time = input.next();  
+                E1.date = new Date (input.next()); 
+                E1.time = input.next();  
                     }  catch(IllegalArgumentException ec){
                 System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
                 return; 
@@ -301,95 +231,81 @@ import java.util.Scanner;
       
                 System.out.print("Enter event location: ");  
                 input.nextLine();  
-                e.location = input.nextLine();  
-                  
-                for ( int i = 0 ; i < names.length ; i++){      
-                    c.name = names[i].trim();  
+                E1.location = input.nextLine();  
               
-                    if ( contacts.findkey(c.name) == true)  
+                    if ( contacts.findkey(C1.name) == true)  
                     {  
-                        c = contacts.retrieve();  
-                        // Added_Event_To_Contact =c.events.addSort(e);
-                        
-                        if (c.checkConflict(e))  
-                        {  
-                            c.events.addSort(e);
-                            // event added to contact  
-                            contacts.update(c.name,c);  
-                            if ( (!events.isEmpty()) && events.search(e)   
-                                    && (events.retrieve().date.compareTo(e.date)==0)   
-                                    && (events.retrieve().time.compareTo(e.time)==0)  
-                                    && (events.retrieve().location.compareTo(e.location)==0)  
-                                    && (events.retrieve().isEvent== e.isEvent))  
+                        if(Events.checkDatesConflict(events, E1)&&Events.checkSameEvent(events, E1)==false)
+                        {
+                            System.out.println("Conflict of events");  
+                            return;
+                        }
+                        C1 = contacts.retrieve();  
+                       
+                            C1.events.addSort(E1);
+                            // event added to C1  
+                            contacts.update(C1.name,C1);  
+                            if ( Events.checkSameEvent(events, E1)) 
                             {  
                                 Events eventFound = events.retrieve();  
-                                eventFound.contactsNames.addSort(c.name);  
+                                eventFound.contactsNames.addSort(C1.name);  
                                 events.update(eventFound);  
-                                event_Updated = true;  
+                                // flag = true;  
                             }  
                               
-                            if (! event_Updated)    
+                            if (Events.checkSameEvent(events, E1)== false)    
                             {  
-                                    e.contactsNames.addSort(c.name);  
-                                    events.addSort(e);  
+                                    E1.contactsNames.addSort(C1.name);  
+                                    events.addSort(E1);  
+                                
                             }  
-                            System.out.println("Events scheduled successfully for " + c.name + "  !");  
-                        }  
-                        else  
-                            System.out.println("Contact has conflict Events for " + c.name + "  !");  
+                            System.out.println("Events scheduled successfully for " + C1.name + "  !");  
+                     
                     }  
                     else  
-                        System.out.println("Contact " + c.name + " not found !");   
+                        System.out.println("Contact " + C1.name + " not found !");   
                         break;                                  
-                 } // end for   
-                 break;
             }  // end schedule event  
             case 2: 
             { // schedule appoinment  
-                e.isEvent = false;  
-                System.out.print("Enter appointment eventTitle: ");  
+                E1.isEvent = false;  
+                System.out.print("Enter appointment title: ");  
                 input.nextLine();  
-                e.eventTitle = input.nextLine();  
+                E1.eventTitle = input.nextLine();  
               
                 System.out.print("Enter contact name: ");  
-                c.name = input.nextLine();  
+                C1.name = input.nextLine();  
               
-                if ( contacts.findkey(c.name) == true)  
+                if ( contacts.findkey(C1.name) == true)  
                 {  
-                    c = contacts.retrieve();  
+                    C1 = contacts.retrieve();  
                       try{
-                    System.out.print("Enter appoinment date and time (MM/DD/YYYY HH:MM): ");  
-                    e.date = new Date (input.next());  
-                    e.time = input.next();  
+                    System.out.print("Enter appointment date and time (MM/DD/YYYY HH:MM): ");  
+                    E1.date = new Date (input.next());  
+                    E1.time = input.next();  
                 }catch(IllegalArgumentException ec){
                 System.out.println("please choose a correct format as indicated: (MM/DD/YYYY)");
                 return;}
-                    System.out.print("Enter appoinment location: ");  
+                    System.out.print("Enter appointment location: ");  
                     input.nextLine();  
-                    e.location = input.nextLine();  
+                    E1.location = input.nextLine();  
       
-                    if ( (!events.isEmpty()) && events.search(e)   
-                            && (events.retrieve().date.compareTo(e.date)==0)   
-                            && (events.retrieve().time.compareTo(e.time)==0)  
-                            && (events.retrieve().location.compareTo(e.location)==0)  
-                            && (events.retrieve().isEvent== e.isEvent))  
+                    if (Events.checkSameEvent(events, E1)||Events.checkDatesConflict(events, E1))  
                     {  
-                        System.out.println("Appointment had been scheduled previously, could not add more contacts, try again ");  
+                        System.out.println("Appointment had been scheduled previously, could not add more contacts, try again \n or the time slot is unavalible");  
                     }  
                     else  
                     {  
                         
-                        if (c.checkConflict(e))  
+                        if (C1.events.addSort(E1))  
                         {  
-                            // event added to contact  
-                            c.events.addSort(e);
-                            contacts.update(c.name,c);  
-                            e.contactsNames.addSort(c.name);  
-                            events.addSort(e);  
-                            System.out.println("Appoinment scheduled successfully!   ");  
+                            contacts.update(C1.name,C1);  
+                            E1.contactsNames.addSort(C1.name);  
+                            events.addSort(E1);  
+                            System.out.println("Appointment scheduled successfully! ");  
                         }  
                         else  
-                            System.out.println("Contact has conflict Events/Appoinment !  ");  
+                            System.out.println("Contact has conflict Events/Appoinment! ");  
                         }  
                 }      
                 else  
@@ -402,8 +318,7 @@ import java.util.Scanner;
             }
         }      
         }  
-          
-        //5. Print event details  
+
         public static void PrintEvent(){   
             if(contacts.empty()||events.isEmpty())
             {
@@ -413,7 +328,7 @@ import java.util.Scanner;
 
               System.out.println("Enter search criteria:");  
             System.out.println("1. contact name");  
-            System.out.println("2. Events tittle");  
+            System.out.println("2. Events title");  
             System.out.println("\nEnter your choice: ");  
             int choice = input.nextInt();  
             switch ( choice )  
@@ -421,12 +336,9 @@ import java.util.Scanner;
                 case 1:  
                 {  
                     Contact c = new Contact();  
-                    System.out.print("Enter the contact name :  ");  
+                    System.out.print("Enter the contact name:  ");  
                     input.nextLine();  
                     c.name = input.nextLine();  
-                              
-                    if (! contacts.empty() )  
-                    {  
                       if (contacts.findkey(c.name) == true)  
                       {  
                         System.out.println("Contact found !");  
@@ -434,76 +346,63 @@ import java.util.Scanner;
       
                         if (c.events.isEmpty())  
                             System.out.println("No events found for this contact !");  
-                         }  
+                          
                         c.events.findFirst();  
                         while( c.events.current != null) 
                         {  
                             Events e = c.events.retrieve();  
-                            if (!events.isEmpty() && events.search(e)   
-                                    && (events.retrieve().date.compareTo(e.date)==0)   
-                                    && (events.retrieve().time.compareTo(e.time)==0)  
-                                    && (events.retrieve().location.compareTo(e.location)==0)  
-                                    && (events.retrieve().isEvent== e.isEvent))  
+                            if (Events.checkSameEvent(events, e))  
                                 System.out.println(events.retrieve().toString());  
                             c.events.findNext();  
-                        }  
-                        
-                    }  
-                    else  
+                        }
+                    }
+                        else 
                         System.out.println("Contact not found !");  
                 }  
                 break;  
       
                 case 2:  
                 {  
-                    Events e = new Events();  
-                    System.out.print("Enter the event eventTitle:  ");  
+                    Events E1 = new Events();  
+                    int count=0;
+                    System.out.print("Enter the event title:  ");  
                     input.nextLine();  
-                    e.eventTitle = input.nextLine();  
-                      
-                   if (! events.isEmpty())  
-                    {  
+                    E1.eventTitle = input.nextLine();  
                         events.findFirst();  
                         while( events.current != null) 
                         {     
-                            if (events.retrieve().compareTo(e) == 0)  
+                            if (events.retrieve().compareTo(E1) == 0)  
                             {  
-                                if (events.retrieve().isEvent == true)  
-                                    System.out.println("Events found!");  
+                                if (events.retrieve().isEvent == true) 
+                                    System.out.println("Event found!");  
                                 else  
-                                    System.out.println("Appoinment found!");  
+                                    System.out.println("Appointment found!");  
                                   
-                                Events ee = events.retrieve();  
-                                System.out.println(ee);  
+                                Events E2 = events.retrieve();  
+                                System.out.println(E2);  
+                                count++;
                             }  
                             events.findNext();  
                         }  
-                    }  
-                    else  
-                        System.out.println("Events/Appoinment not found !");  
+                        if(count==0)
+                        System.out.println("Events or Appointment not found !");  
                 }  
                 break;  
             }  
         }  
           
-        //6. Print contacts by first name  
         public static void PrintContactsFirstName(){  
              
             System.out.print("Enter the first name:");  
-           String fname = input.next().trim();  
+           String firstName = input.next().trim();  
               
             if (contacts.empty())  
                 System.out.println("No Contacts found !");  
             else  
-                contacts.SearchSameFirstName(fname);  
+                contacts.SearchSameFirstName(firstName);  
         }  
           
-        //7. Print all events alphabetically // O(n)  
-        public static void PrintAllEvents(){  
-            // if (!events.isEmpty())  
-            //     System.out.println(events.toString());  
-            // else  
-            //     System.out.println("No events found !");  
+        public static void printAllEventsAlphabetically(){  
             int count = 1;
             if (events.isEmpty()) // check if there is no events
                 System.out.println("No events found !");
@@ -566,7 +465,7 @@ import java.util.Scanner;
                         break;  
                           
                     case 7:  
-                        PrintAllEvents();  
+                        printAllEventsAlphabetically();  
                         break;  
                           
                     case 8:  

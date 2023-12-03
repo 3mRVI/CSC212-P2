@@ -1,18 +1,11 @@
     import java.util.Date;  
-      
-    /* 
-    Events: This class will represent events or appointment that can be scheduled with a contact. It  
-    should have fields for the event eventTitle, date and time, location, and the contact involved in this  
-    event. 
-    */  
-      
     public class Events implements Comparable<Events> {  
         String eventTitle;  
-        Date date;//2023/11/24  
+        Date date; 
         String time;  
         String location;  
         boolean isEvent;  // event true , appointment = false;  
-        LinkedList <String> contactsNames;//if event have many contact  
+        LinkedList <String> contactsNames;//if event has more than contact one contact
       
         public Events() {  
             this.eventTitle = "";  
@@ -23,12 +16,12 @@
             this.contactsNames = new LinkedList<String> ();  
         }  
           
-        public Events(String eventTitle, String date, String time, String location, boolean t, String contact) {  
+        public Events(String eventTitle, String date, String time, String location, boolean type, String contact) {  
             this.eventTitle = eventTitle;  
             this.date = new Date(date);  
             this.time = time;  
             this.location = location;  
-            this.isEvent =t;  
+            this.isEvent =type;  
             this.contactsNames = new LinkedList<String> ();  
             contactsNames.addSort(contact);  
         }  
@@ -49,27 +42,48 @@
                     return true;   
                 return false;  
         }  
-       
+       public static boolean checkSameEvent(LinkedList<Events> eList, Events e){
+                if( (!eList.isEmpty()) && eList.search(e)   
+                && (eList.retrieve().date.compareTo(e.date)==0)   
+                && (eList.retrieve().time.compareTo(e.time)==0)  
+                && (eList.retrieve().location.compareTo(e.location)==0)  
+                && (eList.retrieve().isEvent== e.isEvent))
+                return true;
+            return false;
+
+       }
+       public static boolean checkDatesConflict(LinkedList<Events> eList, Events e){
+        if(eList.isEmpty())
+            return false;
+        eList.findFirst();
+        while (eList.current != null){
+            if(eList.retrieve().date.compareTo(e.date)==0 &&
+            eList.retrieve().time.compareToIgnoreCase(e.time)==0)
+            return true;
+            eList.findNext();
+        }
+        return false;
+       }
         @Override  
         public String toString() {  
-            String EventT = (this.isEvent == true)? "Events ": "Appoinment ";    
+            String eType = (this.isEvent == true)? "Events ": "Appoinment ";    
             String rr="";   
-            String str = "\n" + EventT + " eventTitle: " + eventTitle +  
-                        "\n " + EventT + "  date and time (MM/DD/YYYY HH:MM): " + date + time +  
-                       "\n" + EventT + " location: " + location +  
-                       "\nType: " + EventT +  
+            String container = "\n" + eType + " title: " + eventTitle +  
+                        "\n " + eType + "  date and time (MM/DD/YYYY HH:MM): " + date + time +  
+                       "\n" + eType + " location: " + location +  
+                       "\nType: " + eType +  
                         "\nContacts names:   \n";
                         contactsNames.findFirst();
                         while(contactsNames.current !=null){ 
                         rr+=contactsNames.retrieve()+", ";  
                         contactsNames.findNext();
                         }
-              return str+rr;  
+              return container+rr;  
         }  
           
           
         @Override  
         public int compareTo(Events obj) {  
-                return (this.eventTitle.compareToIgnoreCase(obj.eventTitle)); //0 eqal + big - less  
+                return (this.eventTitle.compareToIgnoreCase(obj.eventTitle)); 
         }  
  }  

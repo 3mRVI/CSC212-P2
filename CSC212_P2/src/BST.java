@@ -192,36 +192,9 @@
         }  
         return false; // Not found  
         }  
-        //======================================================================================  
-        /*  
-        In order traversal 
-        */  
-        // @Override  
-        // public String toString()   
-        // {  
-        //     String str = "";  
-        //     if ( root == null)  
-        //         return str;  
-        //     str = recin_order_Traversal ( root , str );  
-        //     return str;  
-        // }  
-          
-        // private String recin_order_Traversal (BSTNode p ,String str)  
-        // {  
-        //     if (p == null)  
-        //         return "";  
-        //     else  
-        //     {  
-        //         str = recin_order_Traversal(p.left , str);  
-        //         str += p.data.toString() + "    ";  
-        //         str += recin_order_Traversal(p.right, str);  
-        //     }  
-        //     return str;  
-        // }  
+     
       
-        //==============================================  
-        // Search contcat phone in the BST O(n)  
-        //==============================================  
+       
         public boolean SearchPhone(String phone)  
         {  
             return SearchPhone_rec (root, phone);  
@@ -237,66 +210,57 @@
             }  
               
             return (SearchPhone_rec(p.left , phone) || SearchPhone_rec(p.right, phone));  
-        }  
+        }//O(n)
       
-        //==============================================  
-        // Search contcat email in the BST O(n)  
-        //==============================================  
-        public boolean SearchEmail(String email)  
+       
+        public void SearchEmail(String email)  
         {  
-           return SearchEmail_rec(root, email);  
+            SearchEmail_rec (root, email);  
         }  
-        private boolean SearchEmail_rec (BSTNode  p, String email)  
+        private void SearchEmail_rec (BSTNode p, String email)  
         {  
             if (p == null)  
-                return false;  
+                return;  
               
-            else    if ((p.data).compareToEmail(email) == 0) {
+            else    if (((Contact)p.data).compareToEmail(email) == 0)  
                 System.out.println(p.data);  
-                return true;
-            }
-            return(SearchEmail_rec(p.left , email)||  SearchEmail_rec(p.right, email));  
+              
+            SearchEmail_rec(p.left , email);  
+            SearchEmail_rec(p.right, email);  
         }  
-          
-        //==============================================  
-        // Search contcat address in the BST O(n)  
-        //==============================================  
-        public boolean SearchAddress(String address)  
+          //o(n)
+        
+        public void SearchAddress(String address)  
         {  
-           return SearchAddress_rec (root, address);  
+            SearchAddress_rec (root, address);  
         }  
-        private boolean SearchAddress_rec (BSTNode p, String address)  
+        private void SearchAddress_rec (BSTNode  p, String address)  
         {  
             if (p == null)  
-                return false;  
-            else    if ((p.data).compareToAddress(address) == 0) {
+                return ;  
+            else    if (((Contact)p.data).compareToAddress(address) == 0)  
                 System.out.println(p.data);  
-                return true;
-            }
-            return(SearchAddress_rec(p.left , address)||SearchAddress_rec(p.right, address));  
-        }  
+              
+            SearchAddress_rec(p.left , address);  
+            SearchAddress_rec(p.right, address);  
+        } //O(n) 
           
-        //==============================================  
-        // Search contcat birthday in the BST O(n)  
-        //==============================================  
-        public boolean SearchBirthday(Date birthday)  
+       
+        public void SearchBirthday(Date birthday)  
         {  
-           return SearchBirthday_rec (root, birthday);  
+            SearchBirthday_rec (root, birthday);  
         }  
-        private boolean SearchBirthday_rec (BSTNode  p, Date birthday)  
+        private void SearchBirthday_rec (BSTNode  p, Date birthday)  
         {  
             if (p == null)  
-                return false;  
-            else    if ((p.data).compareToBirthday(birthday) == 0) {
+                return ;  
+            else    if (((Contact)p.data).compareToBirthday(birthday) == 0)  
                 System.out.println(p.data);  
-                return true;
-            }
-            return(SearchBirthday_rec(p.left , birthday)|| SearchBirthday_rec(p.right, birthday));  
-        }  
-      
-        //==============================================  
-        // Search contcat birthday in the BST O(n)  
-        //==============================================  
+              
+            SearchBirthday_rec(p.left , birthday);  
+            SearchBirthday_rec(p.right, birthday);  
+        } //O(n)
+       
         public void SearchSameFirstName(String name)  
         {  
             SearchSameFirstName_rec (root, name.trim());  
@@ -310,6 +274,6 @@
              
             SearchSameFirstName_rec(p.left , name);  
             SearchSameFirstName_rec(p.right, name);  
-        }  
+        }  //O(n)
       
     }  
